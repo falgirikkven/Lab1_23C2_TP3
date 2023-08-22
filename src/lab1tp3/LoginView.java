@@ -6,6 +6,7 @@ package lab1tp3;
 
 import java.awt.Color;
 import java.util.Arrays;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -35,7 +36,6 @@ public class LoginView extends javax.swing.JFrame {
         l_password = new javax.swing.JLabel();
         contrasena = new javax.swing.JPasswordField();
         submitButton = new javax.swing.JButton();
-        resultado = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Iniciar Seción");
@@ -63,19 +63,12 @@ public class LoginView extends javax.swing.JFrame {
             }
         });
 
-        resultado.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
-        resultado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        resultado.setText(" ");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(resultado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -108,9 +101,7 @@ public class LoginView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(l_password)
                     .addComponent(contrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                .addComponent(resultado)
-                .addGap(28, 28, 28)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
                 .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33))
         );
@@ -121,18 +112,17 @@ public class LoginView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
-        String emailUsr = "alumno@ulp.edu.ar";
-        char[] psw = {'1', '2', '3', '4', '5', '6', '7', '8'};
-        if (direccion.getText().isEmpty()) {
-            resultado.setForeground(Color.red);
-            resultado.setText("Ingrese nombre de usuario");
-        } else if (Arrays.equals(contrasena.getPassword(), psw)
-                && direccion.getText().equals(emailUsr)) {
-            resultado.setForeground(Color.black);
-            resultado.setText("Bienvenido");
+        String inputEmail = direccion.getText();
+        char[] inputPsw = contrasena.getPassword();
+        String usrEmail = "alumno@ulp.edu.ar";
+        char[] usrPsw = {'1', '2', '3', '4', '5', '6', '7', '8'};
+        if (inputEmail.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ingrese nombre de usuario.", "Datos incompletos", JOptionPane.ERROR_MESSAGE);
+        } else if (inputEmail.equals(usrEmail)
+                && Arrays.equals(inputPsw, usrPsw)) {
+            JOptionPane.showMessageDialog(this, "Bienvenido", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            resultado.setForeground(Color.red);
-            resultado.setText("Usuario y/o contraseña incorrectos");
+            JOptionPane.showMessageDialog(this, "Usuario y/o contraseña incorrectos.", "Datos erróneos", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_submitButtonActionPerformed
 
@@ -174,7 +164,6 @@ public class LoginView extends javax.swing.JFrame {
     private javax.swing.JTextField direccion;
     private javax.swing.JLabel l_direccion;
     private javax.swing.JLabel l_password;
-    private javax.swing.JLabel resultado;
     private javax.swing.JButton submitButton;
     // End of variables declaration//GEN-END:variables
 }
